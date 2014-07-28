@@ -522,6 +522,7 @@ except subprocess.CalledProcessError:
 import os
 import re
 import subprocess
+import platform
 
 def add_jobs_segment():
     pppid = subprocess.Popen(['ps', '-p', str(os.getppid()), '-oppid='], stdout=subprocess.PIPE).communicate()[0].strip()
@@ -531,7 +532,8 @@ def add_jobs_segment():
     if num_jobs > 0:
         powerline.append(' %d ' % num_jobs, Color.JOBS_FG, Color.JOBS_BG)
 
-add_jobs_segment()
+if platform.system() != "Windows":
+    add_jobs_segment()
 
 
 def add_root_indicator_segment():
