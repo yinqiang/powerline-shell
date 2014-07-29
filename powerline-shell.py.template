@@ -309,7 +309,8 @@ def get_short_path(cwd):
     path = ''
     for i in range(len(names)):
         path += os.sep + names[i]
-        if os.path.samefile(path, home):
+        # if os.path.samefile(path, home):
+        if os.stat(path) == os.stat(home):
             return ['~'] + names[i+1:]
     if not names[0]:
         return ['/']
